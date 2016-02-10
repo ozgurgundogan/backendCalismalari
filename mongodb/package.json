@@ -1,0 +1,10 @@
+{
+	"name": "simpleChat",
+	"version": "0.0.1",
+	"description": "web chat boilerplate with Node.js and Socket.io",
+	"dependencies": {
+		"socket.io": "0.9.14",
+		"express": "3.2.4"
+	},
+	"author": "Ozgur Gundogan"
+}
