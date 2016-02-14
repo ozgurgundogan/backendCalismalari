@@ -18,6 +18,8 @@ for our app.*/
 var databaseUrl = "mydb2"; // "username:password@example.com/mydb"
 var collections = ["users"];
 var mongojs = require("mongojs");
+
+
 var db = mongojs(databaseUrl, collections);
 
 var app = express();
