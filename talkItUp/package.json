@@ -1,0 +1,10 @@
+{
+  "name": "metu-chat",
+  "main": "server.js",
+  "dependencies": {
+    "mongoose": "latest",
+    "morgan": "latest",
+    "express": "latest",
+    "socket.io": "latest"
+  }
+}

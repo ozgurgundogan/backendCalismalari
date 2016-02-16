@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="self.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="ang.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="offApp" ng-controller="offAppController">
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+                <div class="row">
+                    <div class="col-sm-12" id="sideSubjectNavigation">
+                        <h4>METU</h4>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li ng-repeat="subject in sideNavSubjects"><a href="#" onclick="openSubject('as',5,3);">{{subject.name}} {{subject.subjectId}} </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row force-to-bottom">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-danger force-to-bottom" data-toggle="modal" data-target="#myModal" id="newIssueButton">New Issue</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Talking Area -->
+            <div class="col-sm-10 talking-area sidenav">
+                <div class="row top-buffer-for-navbar">
+                    <div class="col-sm-12" id="talkingSpaceMenu">
+                        <ul class="nav nav-tabs">
+                            <li ng-repeat="talkingSpaceTab in talkingSpaceTabs"><a href="#"> {{talkingSpaceTab.name}} <span class="badge badge-warning"> {{talkingSpaceTab.unseenMessageCounts}} </span> </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row top-buffer-for-label">
+                    <div class="col-sm-12"> <span class="label label-warning">Food</span> <span class="label label-warning">Ipsum</span> <span class="label label-warning">Food</span> <span class="label label-warning">Ipsum</span> <span class="badge pull-right">5 Person</span> </div>
+                </div>
+                <div class="row scrollable-area">
+                    <div class="col-sm-12" id="show-talks">
+                    </div>
+                </div>
+                <div class="row top-buffer-for-text-input">
+                    <form role="form">
+                        <div class="col-sm-11">
+                            <div class="form-group">
+                                <textarea class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="submit" class="btn submit-button-color">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Create New Issue</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" id="newIssueForm" method="POST" action="">
+                                <div class="form-group">
+                                    <label for="mainIssue">Main Issue</label>
+                                    <input type="text" class="form-control" id="mainIssue" maxlength='50' required>
+                                    <label for="subIssue" class="issue-pop-up-internal-margin">Sub - Issues</label>
+                                    <input type="text" class="form-control" id="subIssue">
+                                    <button type="submit" class="btn btn-success issue-pop-up-internal-margin" id="issueCreateSubmitButton">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

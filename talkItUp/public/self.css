@@ -1,0 +1,184 @@
+    /*
+            SIDE BAR
+    */
+
+.sidenav {
+    background-color: #f8ca00;
+    height: 100%;
+}
+
+footer {
+    background-color: #FF0000;
+    color: white;
+    padding: 15px;
+}
+
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {
+        height: auto;
+    }
+}
+
+
+/*
+            SIDE BAR NAV
+    */
+
+.nav-stacked li a {
+    color: #000000;
+}
+
+.nav-stacked li a:hover {
+    background-color: #F8B805 !important;
+    border-radius: 10px;
+}
+
+.nav-stacked li.active a {
+    background-color: #F8B805 !important;
+    border-radius: 10px;
+    color: #000000 !important;
+    text-decoration: underline;
+}
+
+.nav-stacked li.active a:hover {
+    background-color: #F8B805 !important;
+    border-radius: 10px;
+}
+
+
+/*
+        TALKING AREA
+    */
+
+.talking-area {
+    background-color: #333333;
+}
+
+.scrollable-area {
+    overflow-y: scroll;
+    height: 80%;
+    color: #CFCFCF;
+    background-color: #636363;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.form-control {
+    height: 10%;
+}
+
+.submit-button-color {
+    background-color: #f8ca00;
+}
+
+.alert-info {
+    padding: 10px;
+}
+
+.alert-warning {
+    padding: 3px;
+}
+
+
+/*
+        TALKING AREA NAV
+    */
+
+.nav-tabs {
+    border-bottom-color: #F86758 !important;
+}
+
+.nav-tabs > li > a {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.nav-tabs li a {
+    color: #555555;
+}
+
+.nav-tabs > li > a {
+    border: medium none;
+    border-color: #F86758 !important;
+    border-bottom-color: #F87854 !important;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #F87854 !important;
+    color: #fff;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    background-color: #F87854 !important;
+}
+
+
+/*
+        TALKING AREA MARGIN BUFFER
+    */
+
+.top-buffer-for-navbar {
+    margin-top: 10px;
+}
+
+.top-buffer-for-label {
+    margin-top: 10px;
+}
+
+.top-buffer-for-text-input {
+    margin-top: 1%;
+}
+
+.top-buffer-for-bagde-person {
+    right: 3px;
+}
+
+.label-warning {
+    background-color: #f8ca00;
+    color: #000000;
+}
+
+.tab-content {
+    background-color: #303136;
+    color: #fff;
+    padding: 5px
+}
+
+.badge-warning {
+    background-color: #FF5C4F;
+}
+
+.active .badge-warning {
+    background-color: #FF7545;
+}
+
+.force-to-bottom {
+    position: absolute;
+    bottom: 10px;
+    margin: 0 auto;
+}
+
+
+/*
+        ISSUE POP UP BAR
+    */
+
+.issue-pop-up-internal-margin {
+    margin-top: 10px;
+}
+
+.bootstrap-tagsinput {
+    width: 100%;
+}
+
+.label {
+    line-height: 2 !important;
+}

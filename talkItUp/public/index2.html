@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script>
+          var moduleA = angular.module("MyModuleA", []);
+          moduleA.controller("MyControllerA", function($scope) {
+              $scope.name = "Bob A";
+          });
+
+          var moduleB = angular.module("MyModuleB", []);
+          moduleB.controller("MyControllerB", function($scope) {
+              $scope.name = "Steve B";
+          });
+
+          angular.element(document).ready(function() {
+              var myDiv1 = document.getElementById("myDiv1");
+              angular.bootstrap(myDiv1, ["MyModuleA", "MyModuleB"]);
+
+              var myDiv2 = document.getElementById("myDiv2");
+              angular.bootstrap(myDiv2, ["MyModuleB"]);
+          });
+        </script>
+    </head>
+    <body>
+        <div id="myDiv1">
+            <h1>myDiv1</h1>
+            <div ng-controller="MyControllerA">
+                {{name}}
+            </div>
+            <div ng-controller="MyControllerB">
+                {{name}}
+            </div>
+        </div>
+
+        <div id="myDiv2">
+            <h1>myDiv2</h1>
+            <div ng-controller="MyControllerB">
+                {{name}}
+            </div>
+        </div>
+    </body>
+</html>
