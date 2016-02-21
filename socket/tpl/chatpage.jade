@@ -1,0 +1,71 @@
+doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=iso-8859-1')
+    meta(http-equiv='Content-Type', content='text/html; charset=iso-8859-9')
+    meta(http-equiv='Content-language', content='tr')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='/self.css')
+    script(type='text/javascript', charset='utf-8', src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js')
+    script(type='text/javascript', charset='utf-8', src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(type='text/javascript', charset='utf-8', src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(type='text/javascript', charset='utf-8', src='/index.js')
+  body(ng-app='offApp', ng-controller='offAppController')
+    .container-fluid
+      .row.content
+        .col-sm-2.sidenav
+          .row
+            #sideSubjectNavigation.col-sm-12
+              h4
+              ul.nav.nav-pills.nav-stacked
+                li(ng-repeat='subject in sideNavSubjects')
+                  a(href='', id='sideNavSubjectId_{{subject.subjectId}}', onclick='javascript:openSubject(this.id)')
+                    | {{subject.subjectName}} 
+                    span.badge.badge-warning.nav-force-to-right  {{subject.numberOfPerson}}  
+          .row.force-to-bottom
+            .col-sm-12
+              button#newIssueButton.btn.btn-danger(type='button', data-toggle='modal', data-target='#myModal') New Issue
+        // Talking Area
+        .col-sm-10.talking-area.sidenav
+          .row.top-buffer-for-navbar
+            #talkingSpaceMenu.col-sm-12
+              ul.nav.nav-tabs
+                li(ng-repeat='talkingSpaceTab in talkingSpaceTabs', onmouseover='showCloseButton(this)', onmouseout='hiddenCloseButton(this)')
+                  a(id='talkingSpaceTabId_{{talkingSpaceTab.subjectId}}', onclick='javascript:switchSubjectWithChangingId(this.id)')
+                    | {{talkingSpaceTab.subjectName}} 
+                    span.badge.badge-warning  {{talkingSpaceTab.unseenMessageCounts}} 
+                    .closeButton(id='talkingSpaceTabCloseId_{{talkingSpaceTab.subjectId}}', onclick='javascript:closeRoom(this.id)') x
+          .row.top-buffer-for-label
+            #subSubjects.col-sm-12  
+          .row.scrollable-area
+            #showTalks.col-sm-12
+              ul.talkingBars
+                li(ng-repeat='currentPageTalk in currentPageTalks')
+                  .namebubble {{currentPageTalk.writer}}
+                  .bubble {{currentPageTalk.message}}
+          .row.top-buffer-for-text-input
+            form(role='form')
+              .col-sm-11
+                .form-group
+                  textarea.form-control(required='')
+              .col-sm-1
+                button.btn.submit-button-color(type='submit') Submit
+        // Modal
+        #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+          .modal-dialog(role='document')
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') ×
+                h4#myModalLabel.modal-title Create New Issue
+              .modal-body
+                form#newIssueForm(role='form', method='POST', action='')
+                  .form-group
+                    label(for='mainIssue') Main Issue
+                    input#mainIssue.form-control(type='text', maxlength='50', required='')
+                    label.issue-pop-up-internal-margin(for='subIssue') Sub - Issues
+                    input#subIssue.form-control(type='text')
+                    button#issueCreateSubmitButton.btn.btn-success.issue-pop-up-internal-margin(type='submit') Create

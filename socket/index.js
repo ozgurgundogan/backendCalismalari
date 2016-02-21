@@ -21,19 +21,10 @@
 */
 
 
-
-
-
-
-
-
-
-
-
-
 var express = require("express");
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
+var bodyParser = require('body-parser');
 
 var port = 3601;
 
@@ -48,6 +39,10 @@ var db;
 app.set('views', __dirname + '/tpl');
 app.set('view engine', "jade");
 app.engine('jade', require('jade').__express);
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 app.use(express.static(__dirname + '/public'));
 
@@ -102,7 +97,7 @@ MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, dbb) {
  *
  */
 app.get("/", function(req, res) {
-    res.render("page");
+    res.render("chatpage");
 });
 
 
@@ -152,9 +147,9 @@ io.sockets.on('connection', function(socket) {
 
     /**************************************************************************************/
 
-    socket.on("startToSimulate", function(data) {
+    /*socket.on("startToSimulate", function(data) {
         setInterval(simulateMessageWritten, 4000);
-    });
+    });*/
     
 });
 
@@ -302,6 +297,8 @@ function sentRoomInfoBackToUser(socket, roomName, userId) {
 }
 
 
+
+/* debugging simulation */
 function simulateMessageWritten() {
 
     con(" simulate message writing ");
@@ -330,7 +327,7 @@ function simulateMessageWritten() {
 
 }
 
-/**/
+/* bu bloktan sonra database debug methodlarını içermektedir.*/
 function listCollection(collectionName) {
     var cursor = db.collection(collectionName).find();
 

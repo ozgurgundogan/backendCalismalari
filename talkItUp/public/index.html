@@ -3,15 +3,17 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+    <meta http-equiv="Content-language" content="tr">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="self.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="ang.js"></script>
-    <script src="index.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ang.js"></script>
+    <script type="text/javascript" charset="utf-8" src="index.js"></script>
 </head>
 
 <body ng-app="offApp" ng-controller="offAppController">
@@ -20,15 +22,15 @@
             <div class="col-sm-2 sidenav">
                 <div class="row">
                     <div class="col-sm-12" id="sideSubjectNavigation">
-                        <h4>METU</h4>
+                        <h4></h4>
                         <ul class="nav nav-pills nav-stacked">
-                            <li ng-repeat="subject in sideNavSubjects"><a href="#" onclick="openSubject('as',5,3);">{{subject.name}} {{subject.subjectId}} </a></li>
+                            <li ng-repeat="subject in sideNavSubjects"><a href="" id="sideNavSubjectId_{{subject.subjectId}}" onclick="javascript:openSubject(this.id)">{{subject.subjectName}} <span class="badge badge-warning nav-force-to-right"> {{subject.numberOfPerson}}  </span></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="row force-to-bottom">
                     <div class="col-sm-12">
-                        <button type="button" class="btn btn-danger force-to-bottom" data-toggle="modal" data-target="#myModal" id="newIssueButton">New Issue</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" id="newIssueButton">New Issue</button>
                     </div>
                 </div>
             </div>
@@ -37,15 +39,21 @@
                 <div class="row top-buffer-for-navbar">
                     <div class="col-sm-12" id="talkingSpaceMenu">
                         <ul class="nav nav-tabs">
-                            <li ng-repeat="talkingSpaceTab in talkingSpaceTabs"><a href="#"> {{talkingSpaceTab.name}} <span class="badge badge-warning"> {{talkingSpaceTab.unseenMessageCounts}} </span> </a></li>
+                            <li ng-repeat="talkingSpaceTab in talkingSpaceTabs" onmouseover="showCloseButton(this)" onmouseout="hiddenCloseButton(this)"><a id="talkingSpaceTabId_{{talkingSpaceTab.subjectId}}" onclick="javascript:switchSubjectWithChangingId(this.id)"> {{talkingSpaceTab.subjectName}} <span class="badge badge-warning"> {{talkingSpaceTab.unseenMessageCounts}} </span>  <div class="closeButton" id="talkingSpaceTabCloseId_{{talkingSpaceTab.subjectId}}" onclick="javascript:closeRoom(this.id)">x</div> </a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="row top-buffer-for-label">
-                    <div class="col-sm-12"> <span class="label label-warning">Food</span> <span class="label label-warning">Ipsum</span> <span class="label label-warning">Food</span> <span class="label label-warning">Ipsum</span> <span class="badge pull-right">5 Person</span> </div>
+                    <div class="col-sm-12" id="subSubjects"> </div>
                 </div>
                 <div class="row scrollable-area">
-                    <div class="col-sm-12" id="show-talks">
+                    <div class="col-sm-12" id="showTalks">
+                        <ul class="talkingBars">
+                            <li ng-repeat="currentPageTalk in currentPageTalks">
+                                <div class="namebubble">{{currentPageTalk.writer}}</div>
+                                <div class="bubble">{{currentPageTalk.message}}</div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="row top-buffer-for-text-input">

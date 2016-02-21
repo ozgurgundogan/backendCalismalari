@@ -1,0 +1,4 @@
+Sockets
+	newRoomFromClient -> createRoom
+	joiningToRoomFromClient -> sentRoomInfoBackToUser
+	destroyRoomFromClient -> destroyRoom

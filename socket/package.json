@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "web chat boilerplate with Node.js and Socket.io",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "express": "3.2.4",
     "jade": "0.30.0",
     "mongodb": "^2.1.7",
