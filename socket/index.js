@@ -39,13 +39,13 @@ var db;
 app.set('views', __dirname + '/tpl');
 app.set('view engine', "jade");
 app.engine('jade', require('jade').__express);
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-})); 
+
 
 app.use(express.static(__dirname + '/public'));
-
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+    extended: true
+}));
 
 
 /* işe başlarken hemen rooms collection ını yaratıyoruz. Odaların talk collectionları oda create edilirken yaratılacak.*/
@@ -96,8 +96,33 @@ MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, dbb) {
  *       ROUTING ISSUES
  *
  */
+
+
 app.get("/", function(req, res) {
+    res.render("loginpage");
+});
+
+
+app.get("/chat", function(req, res) {
     res.render("chatpage");
+});
+
+app.post('/registerUser', function(req, res) {
+    var username = req.body.username,
+        useremail = req.body.email,
+        userpassword = req.body.password,
+        userconfirmpassword = req.body.confirmpassword;
+
+
+    con(username + " - " + useremail + " - " + userpassword + " - " + userconfirmpassword);
+    res.redirect("/chat");
+
+});
+
+app.post('/loginUser', function(req, res) {
+    var username = req.body.username,
+        userpassword = req.body.password;
+    // ...
 });
 
 
@@ -150,7 +175,7 @@ io.sockets.on('connection', function(socket) {
     /*socket.on("startToSimulate", function(data) {
         setInterval(simulateMessageWritten, 4000);
     });*/
-    
+
 });
 
 
@@ -333,7 +358,7 @@ function listCollection(collectionName) {
 
     cursor.count(function(err, count) {
         if (count == 0) {
-            con("Nothing found in " + collectionName  + " collection");
+            con("Nothing found in " + collectionName + " collection");
         } else {
             cursor.each(function(err, doc) {
                 if (doc !== undefined || doc !== null) {
